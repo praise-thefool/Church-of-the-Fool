@@ -382,16 +382,18 @@ function addKeyToAggregates(k: KeyPoolKey) {
       k.modelFamilies.forEach(incrementGenericFamilyStats);
       // TODO: add modelIds to GcpKey
       break;
-    // These services don't have any additional stats to track.
-    case "azure":
-    case "google-ai":
-    case "mistral-ai":
     case "deepseek":
       if (!keyIsDeepseekKey(k)) throw new Error("Invalid key type");
       k.modelFamilies.forEach((f) => {
         incrementGenericFamilyStats(f);
         addToFamily(`${f}__overQuota`, k.isOverQuota ? 1 : 0);
       });
+      break;
+    // These services don't have any additional stats to track.
+    case "azure":
+    case "google-ai":
+    case "mistral-ai":
+      k.modelFamilies.forEach(incrementGenericFamilyStats);
       break;
     default:
       assertNever(k.service);
