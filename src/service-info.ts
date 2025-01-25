@@ -2,6 +2,7 @@ import { config, listConfig } from "./config";
 import {
   AnthropicKey,
   AwsBedrockKey,
+  DeepseekKey,
   GcpKey,
   keyPool,
   OpenAIKey,
@@ -35,6 +36,8 @@ const keyIsAnthropicKey = (k: KeyPoolKey): k is AnthropicKey =>
   k.service === "anthropic";
 const keyIsAwsKey = (k: KeyPoolKey): k is AwsBedrockKey => k.service === "aws";
 const keyIsGcpKey = (k: KeyPoolKey): k is GcpKey => k.service === "gcp";
+const keyIsDeepseekKey = (k: KeyPoolKey): k is DeepseekKey =>
+  k.service === "deepseek";
 
 /** Stats aggregated across all keys for a given service. */
 type ServiceAggregate = "keys" | "uncheckedKeys" | "orgs";
@@ -384,7 +387,11 @@ function addKeyToAggregates(k: KeyPoolKey) {
     case "google-ai":
     case "mistral-ai":
     case "deepseek":
-      k.modelFamilies.forEach(incrementGenericFamilyStats);
+      if (!keyIsDeepseekKey(k)) throw new Error("Invalid key type");
+      k.modelFamilies.forEach((f) => {
+        incrementGenericFamilyStats(f);
+        addToFamily(`${f}__overQuota`, k.isOverQuota ? 1 : 0);
+      });
       break;
     default:
       assertNever(k.service);
@@ -452,6 +459,8 @@ function getInfoForFamily(family: ModelFamily): BaseFamilyInfo {
           info.enabledVariants = "not implemented";
         }
         break;
+      case "deepseek":
+        info.overQuotaKeys = familyStats.get(`${family}__overQuota`) || 0;
     }
   }
 
