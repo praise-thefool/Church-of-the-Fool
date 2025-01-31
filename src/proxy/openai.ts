@@ -231,8 +231,10 @@ function fixupMaxTokens(req: Request) {
   delete req.body.max_tokens;
 }
 
+// Models that support 'reasoning_effort'
+// When o1-preview and o1-mini are dead, we can just match all o* models 
 function isO1Model(model: string): boolean {
-  return model === 'o1' || model === 'o1-2024-12-17';
+  return ['o1', 'o1-2024-12-17', 'o3-mini', 'o3-mini-2025-01-31'].includes(model);
 }
 
 // most frontends don't currently support custom reasoning effort for o1
