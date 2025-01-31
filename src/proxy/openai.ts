@@ -183,7 +183,8 @@ openaiRouter.post(
 
 const setupChunkedTransfer: RequestHandler = (req, res, next) => {
   req.log.info("Setting chunked transfer for o1 to prevent Cloudflare timeouts")
-  if (isO1Model(req.body.model)) {
+  // Only o1 doesn't support streaming
+  if (req.body.model === "o1" || req.body.model === "o1-2024-12-17") {
     req.isChunkedTransfer = true;
     res.writeHead(200, {
       'Content-Type': 'application/json',
