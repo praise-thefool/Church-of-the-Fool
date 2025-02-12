@@ -56,7 +56,7 @@ const AnthropicV1MessageMultimodalContentSchema = z.array(
       type: z.literal("tool_result"),
       tool_use_id: z.string(),
       is_error: z.boolean().optional(),
-      content: z.union([z.string(), z.object({}).passthrough()]).optional(),
+      content: z.union([z.string(), z.object({}).passthrough(), z.object({}).passthrough().array()]).optional(),
     }),
   ])
 );
