@@ -29,6 +29,7 @@ const getModelsResponse = () => {
     "claude-3-sonnet@20240229",
     "claude-3-5-sonnet@20240620",
     "claude-3-5-sonnet-v2@20241022",
+    "claude-3-7-sonnet@20250219",
     "claude-3-opus@20240229",
   ];
 
@@ -191,6 +192,14 @@ function maybeReassignModel(req: Request) {
           req.body.model = DEFAULT_MODEL;
       }
       return;
+    
+    case "3.7":
+      switch (flavor) {
+        case "sonnet":
+          req.body.model = "claude-3-7-sonnet@20250219";
+          return;
+      }
+      break;
 
     default:
       req.body.model = DEFAULT_MODEL;

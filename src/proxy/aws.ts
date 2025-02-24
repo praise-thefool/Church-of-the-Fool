@@ -43,6 +43,7 @@ function handleModelsRequest(req: Request, res: Response) {
     ["anthropic.claude-3-sonnet-20240229-v1:0", "Claude 3 Sonnet"],
     ["anthropic.claude-3-5-sonnet-20240620-v1:0", "Claude 3.5 Sonnet (Old)"],
     ["anthropic.claude-3-5-sonnet-20241022-v2:0", "Claude 3.5 Sonnet (New)"],
+    ["anthropic.claude-3-7-sonnet-20250219-v1:0", "Claude 3.7 Sonnet"],
     ["anthropic.claude-3-opus-20240229-v1:0", "Claude 3 Opus"],
     ["mistral.mistral-7b-instruct-v0:2", "Mistral 7B Instruct"],
     ["mistral.mixtral-8x7b-instruct-v0:1", "Mixtral 8x7B Instruct"],

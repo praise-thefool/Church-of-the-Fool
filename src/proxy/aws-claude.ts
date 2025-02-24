@@ -249,6 +249,13 @@ function maybeReassignModel(req: Request) {
           // Add after model id is announced never
           break;
       }
+    case "3.7":
+      switch (name) {
+        case "sonnet":
+          req.body.model = "anthropic.claude-3-7-sonnet-20250219-v1:0";
+          return;
+      }
+      break;
   }
 
   throw new Error(`Provided model name (${model}) could not be mapped to a known AWS Claude model ID.`);

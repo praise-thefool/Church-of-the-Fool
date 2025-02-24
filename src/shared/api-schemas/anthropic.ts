@@ -90,6 +90,10 @@ export const AnthropicV1MessagesSchema = AnthropicV1BaseSchema.merge(
         z.array(z.object({ type: z.literal("text"), text: z.string() })),
       ])
       .optional(),
+    thinking: z.object({
+      type: z.literal("enabled"),
+      budget_tokens: z.number().min(1024),
+    }).optional(),
   })
 );
 export type AnthropicChatMessage = z.infer<

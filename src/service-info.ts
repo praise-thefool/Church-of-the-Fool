@@ -361,7 +361,8 @@ function addKeyToAggregates(k: KeyPoolKey) {
         k.modelIds.forEach((id) => {
           if (id.includes("claude-3-sonnet")) {
             addToFamily(`aws-claude__awsSonnet3`, 1);
-          } else if (id.includes("claude-3-5-sonnet")) {
+          // not ideal but whatever
+          } else if (id.includes("claude-3-5-sonnet") || id.includes("claude-3-7-sonnet")) {
             addToFamily(`aws-claude__awsSonnet3_5`, 1);
           } else if (id.includes("claude-3-haiku")) {
             addToFamily(`aws-claude__awsHaiku`, 1);
