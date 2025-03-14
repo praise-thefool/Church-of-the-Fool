@@ -53,64 +53,57 @@ export const validateContextSize: RequestPreprocessor = async (req) => {
     proxyMax = Number.MAX_SAFE_INTEGER;
   }
 
-  let modelMax: number;
-  if (model.match(/gpt-3.5-turbo-16k/)) {
-    modelMax = 16384;
-  } else if (model.match(/^gpt-4o/)) {
-    modelMax = 128000;
-  } else if (model.match(/^chatgpt-4o/)) {
-    modelMax = 128000;
-  } else if (model.match(/gpt-4-turbo(-\d{4}-\d{2}-\d{2})?$/)) {
-    modelMax = 131072;
-  } else if (model.match(/gpt-4-turbo(-preview)?$/)) {
-    modelMax = 131072;
-  } else if (model.match(/gpt-4-(0125|1106)(-preview)?$/)) {
-    modelMax = 131072;
-  } else if (model.match(/^gpt-4(-\d{4})?-vision(-preview)?$/)) {
-    modelMax = 131072;
-  } else if (model.match(/^o3-mini(-\d{4}-\d{2}-\d{2})?$/)) {
-    modelMax = 200000;
-  } else if (model.match(/^o1(-\d{4}-\d{2}-\d{2})?$/)) {
-    modelMax = 200000;
-  } else if (model.match(/^o1-mini(-\d{4}-\d{2}-\d{2})?$/)) {
-    modelMax = 128000;
-  } else if (model.match(/^o1-preview(-\d{4}-\d{2}-\d{2})?$/)) {
-    modelMax = 128000;
-  } else if (model.match(/gpt-3.5-turbo/)) {
-    modelMax = 16384;
-  } else if (model.match(/gpt-4-32k/)) {
-    modelMax = 32768;
-  } else if (model.match(/gpt-4/)) {
-    modelMax = 8192;
-  } else if (model.match(/^claude-(?:instant-)?v1(?:\.\d)?-100k/)) {
-    modelMax = 100000;
-  } else if (model.match(/^claude-(?:instant-)?v1(?:\.\d)?$/)) {
-    modelMax = 9000;
-  } else if (model.match(/^claude-2\.0/)) {
-    modelMax = 100000;
-  } else if (model.match(/^claude-2/)) {
-    modelMax = 200000;
-  } else if (model.match(/^claude-3/)) {
-    modelMax = 200000;
-  } else if (model.match(/^gemini-/)) {
-    modelMax = 1024000;
-  } else if (model.match(/^anthropic\.claude-3/)) {
-    modelMax = 200000;
-  } else if (model.match(/^anthropic\.claude-v2:\d/)) {
-    modelMax = 200000;
-  } else if (model.match(/^anthropic\.claude/)) {
-    modelMax = 100000;
-  } else if (model.match(/^deepseek/)) {
-    modelMax = 64000;
-  } else if (model.match(/tral/)) {
-    // catches mistral, mixtral, codestral, mathstral, etc. mistral models have
-    // no name convention and wildly different context windows so this is a
-    // catch-all
-    modelMax = MISTRAL_AI_MAX_CONTENT;
-  } else {
-    req.log.warn({ model }, "Unknown model, using 200k token limit.");
-    modelMax = 200000;
-  }
+let modelMax: number;
+if (model.match(/gpt-3.5-turbo-16k/)) {
+  modelMax = 16384;
+} else if (model.match(/^gpt-4o/)) {
+  modelMax = 128000;
+} else if (model.match(/^chatgpt-4o/)) {
+  modelMax = 128000;
+} else if (model.match(/gpt-4-turbo(-\d{4}-\d{2}-\d{2})?$/)) {
+  modelMax = 131072;
+} else if (model.match(/gpt-4-turbo(-preview)?$/)) {
+  modelMax = 131072;
+} else if (model.match(/gpt-4-(0125|1106)(-preview)?$/)) {
+  modelMax = 131072;
+} else if (model.match(/^gpt-4(-\d{4})?-vision(-preview)?$/)) {
+  modelMax = 131072;
+} else if (model.match(/^gpt-4.5-preview$/)) {
+  modelMax = 128000;
+} else if (model.match(/^o1-mini(-\d{4}-\d{2}-\d{2})?$/)) {
+  modelMax = 128000;
+} else if (model.match(/^o1(-preview)?(-\d{4}-\d{2}-\d{2})?$/)) {
+  modelMax = 128000;
+} else if (model.match(/gpt-3.5-turbo/)) {
+  modelMax = 16384;
+} else if (model.match(/gpt-4-32k/)) {
+  modelMax = 32768;
+} else if (model.match(/gpt-4/)) {
+  modelMax = 8192;
+} else if (model.match(/^claude-(?:instant-)?v1(?:\.\d)?-100k/)) {
+  modelMax = 100000;
+} else if (model.match(/^claude-(?:instant-)?v1(?:\.\d)?$/)) {
+  modelMax = 9000;
+} else if (model.match(/^claude-2\.0/)) {
+  modelMax = 100000;
+} else if (model.match(/^claude-2/)) {
+  modelMax = 200000;
+} else if (model.match(/^claude-3/)) {
+  modelMax = 200000;
+} else if (model.match(/^gemini-/)) {
+  modelMax = 1024000;
+} else if (model.match(/^anthropic\.claude-3/)) {
+  modelMax = 200000;
+} else if (model.match(/^anthropic\.claude-v2:\d/)) {
+  modelMax = 200000;
+} else if (model.match(/^anthropic\.claude/)) {
+  modelMax = 100000;
+} else if (model.match(/tral/)) {
+  modelMax = MISTRAL_AI_MAX_CONTENT;
+} else {
+  req.log.warn({ model }, "Unknown model, using 200k token limit.");
+  modelMax = 200000;
+}
 
   const finalMax = Math.min(proxyMax, modelMax);
   z.object({
