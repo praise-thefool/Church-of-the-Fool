@@ -84,9 +84,9 @@ export function renderPage(info: ServiceInfo) {
     <meta charset="utf-8" />
     <meta name="robots" content="noindex" />
     <title>${title}</title>
-    <link rel="stylesheet" href="/res/css/reset.css" media="screen" />
-    <link rel="stylesheet" href="/res/css/sakura.css" media="screen" />
-    <link rel="stylesheet" href="/res/css/sakura-dark.css" media="screen and (prefers-color-scheme: dark)" />
+    <link rel="stylesheet" href="/res/css/aboba.css" media="screen" />
+    <link rel="stylesheet" href="/res/css/aboba.css" media="screen" />
+    <link rel="stylesheet" href="/res/css/aboba.css" media="screen and (prefers-color-scheme: dark)" />
     <style>
       body {
         font-family: sans-serif;
