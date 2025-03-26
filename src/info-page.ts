@@ -94,7 +94,7 @@ export function renderPage(info: ServiceInfo) {
         max-width: 900px;
         margin: 0;
       }
-      
+
       .self-service-links {
         display: flex;
         justify-content: center;
@@ -102,13 +102,29 @@ export function renderPage(info: ServiceInfo) {
         padding: 0.5em;
         font-size: 0.8em;
       }
-      
+
       .self-service-links a {
         margin: 0 0.5em;
       }
     </style>
   </head>
   <body>
+    <div class="floating-star star-1"></div>
+    <div class="floating-star star-2"></div>
+    <div class="floating-star star-3"></div>
+    <div class="floating-star star-4"></div>
+    <div class="floating-star star-5"></div>
+    <div class="floating-star star-6"></div>
+    <div class="floating-star star-7"></div>
+    <div class="floating-star star-8"></div>
+    <div class="floating-star star-9"></div>
+    <div class="floating-star star-10"></div>
+    <div class="floating-star star-11"></div>
+    <div class="floating-star star-12"></div>
+    <div class="floating-star star-13"></div>
+    <div class="floating-star star-14"></div>
+    <div class="floating-star star-15"></div>
+
     ${headerHtml}
     <hr />
     ${getSelfServiceLinks()}
