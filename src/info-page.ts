@@ -109,21 +109,21 @@ export function renderPage(info: ServiceInfo) {
     </style>
   </head>
   <body>
-    <div class="floating-star star-1"></div>
-    <div class="floating-star star-2"></div>
-    <div class="floating-star star-3"></div>
-    <div class="floating-star star-4"></div>
-    <div class="floating-star star-5"></div>
-    <div class="floating-star star-6"></div>
-    <div class="floating-star star-7"></div>
-    <div class="floating-star star-8"></div>
-    <div class="floating-star star-9"></div>
-    <div class="floating-star star-10"></div>
-    <div class="floating-star star-11"></div>
-    <div class="floating-star star-12"></div>
-    <div class="floating-star star-13"></div>
-    <div class="floating-star star-14"></div>
-    <div class="floating-star star-15"></div>
+    <div class="floating-aboba star-1"></div>
+    <div class="floating-aboba star-2"></div>
+    <div class="floating-aboba star-3"></div>
+    <div class="floating-aboba star-4"></div>
+    <div class="floating-aboba star-5"></div>
+    <div class="floating-aboba star-6"></div>
+    <div class="floating-aboba star-7"></div>
+    <div class="floating-aboba star-8"></div>
+    <div class="floating-aboba star-9"></div>
+    <div class="floating-aboba star-10"></div>
+    <div class="floating-aboba star-11"></div>
+    <div class="floating-aboba star-12"></div>
+    <div class="floating-aboba star-13"></div>
+    <div class="floating-aboba star-14"></div>
+    <div class="floating-aboba star-15"></div>
 
     ${headerHtml}
     <hr />
