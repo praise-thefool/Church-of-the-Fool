@@ -14,6 +14,7 @@ const INFO_PAGE_TTL = 2000;
 const MODEL_FAMILY_FRIENDLY_NAME: { [f in ModelFamily]: string } = {
   deepseek: "Deepseek Chat",
   turbo: "GPT-4o Mini / 3.5 Turbo",
+  gpt45: "GPT-4.5",
   gpt4: "GPT-4",
   "gpt4-32k": "GPT-4 32k",
   "gpt4-turbo": "GPT-4 Turbo",
