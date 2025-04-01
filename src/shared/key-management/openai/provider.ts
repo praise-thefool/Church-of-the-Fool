@@ -108,6 +108,7 @@ export class OpenAIKeyProvider implements KeyProvider<OpenAIKey> {
         rateLimitRequestsReset: 0,
         rateLimitTokensReset: 0,
         turboTokens: 0,
+        gpt45Tokens: 0,
         gpt4Tokens: 0,
         "gpt4-32kTokens": 0,
         "gpt4-turboTokens": 0,
