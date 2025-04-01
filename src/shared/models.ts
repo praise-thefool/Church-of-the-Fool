@@ -26,7 +26,7 @@ export type OpenAIModelFamily =
   | "o1"
   | "o1-mini"
   | "o3-mini"
-  | "gpt4.5"
+  | "gpt45"
   | "dall-e";
 export type AnthropicModelFamily = "claude" | "claude-opus";
 export type GoogleAIModelFamily =
@@ -59,7 +59,7 @@ export const MODEL_FAMILIES = (<A extends readonly ModelFamily[]>(
 ) => arr)([
   "deepseek",
   "turbo",
-  "gpt4.5",
+  "gpt45",
   "gpt4",
   "gpt4-32k",
   "gpt4-turbo",
@@ -94,7 +94,7 @@ export const MODEL_FAMILIES = (<A extends readonly ModelFamily[]>(
   "azure-o1",
   "azure-o1-mini",
   "azure-o3-mini",
-  "azure-gpt4.5",
+  "azure-gpt45",
 ] as const);
 
 export const LLM_SERVICES = (<A extends readonly LLMService[]>(
@@ -118,12 +118,12 @@ export const MODEL_FAMILY_SERVICE: {
   gpt4: "openai",
   "gpt4-turbo": "openai",
   "gpt4-32k": "openai",
+  gpt45: "openai",
   gpt4o: "openai",
   "o1": "openai",
   "o1-mini": "openai",
   "o3-mini": "openai",
   "dall-e": "openai",
-  "gpt4.5": "openai",
   
   claude: "anthropic",
   "claude-opus": "anthropic",
@@ -144,7 +144,7 @@ export const MODEL_FAMILY_SERVICE: {
   "azure-o1": "azure",
   "azure-o1-mini": "azure",
   "azure-o3-mini": "azure",
-  "azure-gpt4.5": "azure",
+  "azure-gpt45": "azure",
   "gemini-flash": "google-ai",
   "gemini-pro": "google-ai",
   "gemini-ultra": "google-ai",
@@ -174,7 +174,7 @@ export const OPENAI_MODEL_FAMILY_MAP: { [regex: string]: OpenAIModelFamily } = {
   "^o1-mini(-\\d{4}-\\d{2}-\\d{2})?$": "o1-mini",
   "^o1(-\\d{4}-\\d{2}-\\d{2})?$": "o1",
   "^o3-mini(-\d{4}-\d{2}-\d{2})?$": "o3-mini",
-  "^gpt-4\\.5-preview(-\\d{4}-\\d{2}-\\d{2})?$": "gpt4.5",
+  "^gpt-4\\.5-preview(-\\d{4}-\\d{2}-\\d{2})?$": "gpt45",
 };
 
 export function getOpenAIModelFamily(
