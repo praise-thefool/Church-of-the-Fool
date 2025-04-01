@@ -49,6 +49,7 @@ const MODEL_FAMILY_FRIENDLY_NAME: { [f in ModelFamily]: string } = {
   "azure-o1-mini": "Azure o1 mini",
   "azure-o3-mini": "Azure o3 mini",
   "azure-dall-e": "Azure DALL-E",
+  "azure-gpt45": "Azure GPT-4.5"
 };
 
 const converter = new showdown.Converter();
