@@ -33,6 +33,10 @@ type Config = {
    * Comma-delimited list of Mistral AI API keys.
    */
   mistralAIKey?: string;
+    /**
+   * Comma-delimited list of Grok API keys.
+   */
+  grokXAIKey?: string;
   /**
    * Comma-delimited list of Deepseek API keys.
    */
@@ -432,6 +436,7 @@ export const config: Config = {
   mistralAIKey: getEnvWithDefault("MISTRAL_AI_KEY", ""),
   deepseekKey: getEnvWithDefault("DEEPSEEK_KEY", ""),
   awsCredentials: getEnvWithDefault("AWS_CREDENTIALS", ""),
+  grokXAIKey: getEnvWithDefault("GROK_KEY"),
   gcpCredentials: getEnvWithDefault("GCP_CREDENTIALS", ""),
   azureCredentials: getEnvWithDefault("AZURE_CREDENTIALS", ""),
   proxyKey: getEnvWithDefault("PROXY_KEY", ""),
@@ -547,6 +552,7 @@ function generateSigningKey() {
     config.googleAIKey,
     config.mistralAIKey,
     config.deepseekKey,
+    config.grokXAIKey,
     config.awsCredentials,
     config.gcpCredentials,
     config.azureCredentials,
@@ -696,6 +702,7 @@ export const OMITTED_KEYS = [
   "anthropicKey",
   "googleAIKey",
   "deepseekKey",
+  "grokXAIKey",
   "mistralAIKey",
   "awsCredentials",
   "gcpCredentials",
