@@ -246,6 +246,9 @@ const handleUpstreamErrors: ProxyResHandlerWithBody = async (
           errorPayload.proxy_note = `The upstream API rejected the request. Check the error message for details.`;
         }
         break;
+      case "grok":
+        await handleGrokBadRequestError(req, errorPayload);
+        break;
       case "deepseek":
         await handleDeepseekBadRequestError(req, errorPayload);
         break;
@@ -337,6 +340,9 @@ const handleUpstreamErrors: ProxyResHandlerWithBody = async (
       case "google-ai":
         await handleGoogleAIRateLimitError(req, errorPayload);
         break;
+      case "grok":
+        await handleGrokRateLimitError(req, errorPayload);
+        break;
       case "deepseek":
         await handleDeepseekRateLimitError(req, errorPayload);
         break;
@@ -364,6 +370,7 @@ const handleUpstreamErrors: ProxyResHandlerWithBody = async (
       case "gcp":
       case "azure":
       case "deepseek":
+      case "grok":
         errorPayload.proxy_note = `The key assigned to your prompt does not support the requested model.`;
         break;
       default:
@@ -495,6 +502,22 @@ async function handleGcpRateLimitError(
   } else {
     errorPayload.proxy_note = `Unrecognized 429 Too Many Requests error from GCP.`;
   }
+}
+
+async function handleGrokRateLimitError(
+  req: Request,
+  errorPayload: ProxiedErrorPayload
+){
+  keyPool.markRateLimited(req.key!);
+  await reenqueueRequest(req);
+  throw new RetryableError("Grok rate-limited request re-enqueued.")
+}
+
+async function handleGrokBadRequestError(
+  req: Request,
+  errorPayload: ProxiedErrorPayload
+) {
+  errorPayload.proxy_note = `The API rejected the request. Check the error message for details`;
 }
 
 async function handleDeepseekRateLimitError(
