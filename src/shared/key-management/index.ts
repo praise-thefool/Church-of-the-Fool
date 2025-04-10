@@ -93,3 +93,4 @@ export { GoogleAIKey } from "././google-ai/provider";
 export { MistralAIKey } from "./mistral-ai/provider";
 export { OpenAIKey } from "./openai/provider";
 export { DeepseekKey } from "./deepseek/provider";
+export { GrokXAIKey } from "./grok/provider";
