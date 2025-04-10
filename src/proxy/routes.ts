@@ -11,6 +11,7 @@ import { mistralAI } from "./mistral-ai";
 import { openai } from "./openai";
 import { openaiImage } from "./openai-image";
 import { deepseek } from "./deepseek";
+import { grok } from "./grok";
 import { sendErrorToClient } from "./middleware/response/error-generator";
 
 const proxyRouter = express.Router();
