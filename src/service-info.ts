@@ -21,7 +21,7 @@ import {
   ModelFamily,
   OpenAIModelFamily,
   DeepseekModelFamily,
-  GrokModelFamily,
+  GrokXAIModelFamily,
 } from "./shared/models";
 import { getCostSuffix, getTokenCostUsd, prettyTokens } from "./shared/stats";
 import { getUniqueIps } from "./proxy/rate-limit";
@@ -126,7 +126,7 @@ export type ServiceInfo = {
   & { [f in GoogleAIModelFamily]?: BaseFamilyInfo }
   & { [f in MistralAIModelFamily]?: BaseFamilyInfo }
   & { [f in DeepseekModelFamily]?: BaseFamilyInfo }
-  & { [f in GrokModelFamily]?: BaseFamilyInfo};
+  & { [f in GrokXAIModelFamily]?: BaseFamilyInfo};
 
 // https://stackoverflow.com/a/66661477
 // type DeepKeyOf<T> = (
