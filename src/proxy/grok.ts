@@ -5,7 +5,7 @@ import { createQueuedProxyMiddleware } from "./middleware/request/proxy-middlewa
 import { addKey, finalizeBody } from "./middleware/request";
 import { ProxyResHandlerWithBody } from "./middleware/response";
 
-const deepseekResponseHandler: ProxyResHandlerWithBody = async (
+const grokResponseHandler: ProxyResHandlerWithBody = async (
   _proxyRes,
   req,
   res,
@@ -20,10 +20,10 @@ const deepseekResponseHandler: ProxyResHandlerWithBody = async (
   res.status(200).json({ ...newBody, proxy: body.proxy });
 };
 
-const deepseekProxy = createQueuedProxyMiddleware({
+const grokProxy = createQueuedProxyMiddleware({
   mutations: [addKey, finalizeBody],
   target: "https://api.x.ai/",
-  blockingResponseHandler: deepseekResponseHandler,
+  blockingResponseHandler: grokResponseHandler,
 });
 
 const grokRouter = Router();
@@ -36,7 +36,7 @@ grokRouter.post(
     outApi: "openai",
     service: "grok"
   }),
-  deepseekProxy
+  grokProxy
 );
 
-export const deepseek = grokRouter;
+export const grok = grokRouter;
