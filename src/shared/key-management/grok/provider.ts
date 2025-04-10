@@ -32,7 +32,7 @@ export class GrokXAIKeyProvider implements KeyProvider<GrokXAIKey> {
       this.keys.push({
         key,
         service: this.service,
-        modelFamilies: ["grook"],
+        modelFamilies: ["grok"],
         isDisabled: false,
         isRevoked: false,
         promptCount: 0,
@@ -124,7 +124,7 @@ export class GrokXAIKeyProvider implements KeyProvider<GrokXAIKey> {
     const key = this.keys.find((k) => k.hash === keyHash)!;
     const now = Date.now();
     key.rateLimitedAt = now;
-    key.rateLimitedUntil = now + GrokXAIProvider.RATE_LIMIT_LOCKOUT;
+    key.rateLimitedUntil = now + GrokXAIKeyProvider.RATE_LIMIT_LOCKOUT;
   }
 
   public recheck(): void {
