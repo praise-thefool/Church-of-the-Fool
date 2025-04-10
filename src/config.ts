@@ -436,7 +436,7 @@ export const config: Config = {
   mistralAIKey: getEnvWithDefault("MISTRAL_AI_KEY", ""),
   deepseekKey: getEnvWithDefault("DEEPSEEK_KEY", ""),
   awsCredentials: getEnvWithDefault("AWS_CREDENTIALS", ""),
-  grokXAIKey: getEnvWithDefault("GROK_KEY"),
+  grokXAIKey: getEnvWithDefault("GROK_KEY", ""),
   gcpCredentials: getEnvWithDefault("GCP_CREDENTIALS", ""),
   azureCredentials: getEnvWithDefault("AZURE_CREDENTIALS", ""),
   proxyKey: getEnvWithDefault("PROXY_KEY", ""),
