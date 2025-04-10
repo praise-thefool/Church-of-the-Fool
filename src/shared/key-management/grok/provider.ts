@@ -21,7 +21,7 @@ export class GrokXAIKeyProvider implements KeyProvider<GrokXAIKey> {
   private log = logger.child({ module: "key-provider", service: this.service });
 
   constructor() {
-    const keyConfig = config.grokKey?.trim();
+    const keyConfig = config.grokXAIKey?.trim();
     if (!keyConfig) {
       return;
     }
