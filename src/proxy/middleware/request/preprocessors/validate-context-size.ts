@@ -98,6 +98,8 @@ if (model.match(/gpt-3.5-turbo-16k/)) {
   modelMax = 200000;
 } else if (model.match(/^anthropic\.claude/)) {
   modelMax = 100000;
+  } else if (model.match(/^grok/)) {
+  modelMax = 131072;
 } else if (model.match(/tral/)) {
   modelMax = MISTRAL_AI_MAX_CONTENT;
 } else {
