@@ -14,6 +14,7 @@ import { GcpKeyProvider, GcpKey } from "./gcp/provider";
 import { AzureOpenAIKeyProvider } from "./azure/provider";
 import { MistralAIKeyProvider } from "./mistral-ai/provider";
 import { DeepseekKeyProvider } from "./deepseek/provider";
+import { GrokXAIKeyProvider } from "./grok/provider";
 
 type AllowedPartial = OpenAIKeyUpdate | AnthropicKeyUpdate | Partial<GcpKey>;
 
@@ -32,6 +33,8 @@ export class KeyPool {
     this.keyProviders.push(new GcpKeyProvider());
     this.keyProviders.push(new AzureOpenAIKeyProvider());
     this.keyProviders.push(new DeepseekKeyProvider());
+    this.keyProviders.push(new GrokXAIKeyProvider());
+
   }
 
   public init() {
@@ -134,6 +137,9 @@ export class KeyPool {
   private getServiceForModel(model: string): LLMService {
     if (model.startsWith("deepseek")) {
       return "deepseek";
+    } else if (model.startsWith("grok")) {
+      return "grok";
+    
     } else if (
       model.startsWith("gpt") ||
       model.startsWith("text-embedding-ada") ||

@@ -12,8 +12,10 @@ import { checkCsrfToken, injectCsrfToken } from "./shared/inject-csrf";
 
 const INFO_PAGE_TTL = 2000;
 const MODEL_FAMILY_FRIENDLY_NAME: { [f in ModelFamily]: string } = {
+  grok: "Grok",
   deepseek: "Deepseek Chat",
   turbo: "GPT-4o Mini / 3.5 Turbo",
+  gpt45: "GPT-4.5",
   gpt4: "GPT-4",
   "gpt4-32k": "GPT-4 32k",
   "gpt4-turbo": "GPT-4 Turbo",
@@ -48,6 +50,7 @@ const MODEL_FAMILY_FRIENDLY_NAME: { [f in ModelFamily]: string } = {
   "azure-o1-mini": "Azure o1 mini",
   "azure-o3-mini": "Azure o3 mini",
   "azure-dall-e": "Azure DALL-E",
+  "azure-gpt45": "Azure GPT-4.5"
 };
 
 const converter = new showdown.Converter();
@@ -84,9 +87,9 @@ export function renderPage(info: ServiceInfo) {
     <meta charset="utf-8" />
     <meta name="robots" content="noindex" />
     <title>${title}</title>
-    <link rel="stylesheet" href="/res/css/reset.css" media="screen" />
-    <link rel="stylesheet" href="/res/css/sakura.css" media="screen" />
-    <link rel="stylesheet" href="/res/css/sakura-dark.css" media="screen and (prefers-color-scheme: dark)" />
+    <link rel="stylesheet" href="/res/css/aboba.css" media="screen" />
+    <link rel="stylesheet" href="/res/css/aboba.css" media="screen" />
+    <link rel="stylesheet" href="/res/css/aboba.css" media="screen and (prefers-color-scheme: dark)" />
     <style>
       body {
         font-family: sans-serif;
@@ -94,7 +97,7 @@ export function renderPage(info: ServiceInfo) {
         max-width: 900px;
         margin: 0;
       }
-      
+
       .self-service-links {
         display: flex;
         justify-content: center;
@@ -102,13 +105,29 @@ export function renderPage(info: ServiceInfo) {
         padding: 0.5em;
         font-size: 0.8em;
       }
-      
+
       .self-service-links a {
         margin: 0 0.5em;
       }
     </style>
   </head>
   <body>
+    <div class="floating-aboba star-1"></div>
+    <div class="floating-aboba star-2"></div>
+    <div class="floating-aboba star-3"></div>
+    <div class="floating-aboba star-4"></div>
+    <div class="floating-aboba star-5"></div>
+    <div class="floating-aboba star-6"></div>
+    <div class="floating-aboba star-7"></div>
+    <div class="floating-aboba star-8"></div>
+    <div class="floating-aboba star-9"></div>
+    <div class="floating-aboba star-10"></div>
+    <div class="floating-aboba star-11"></div>
+    <div class="floating-aboba star-12"></div>
+    <div class="floating-aboba star-13"></div>
+    <div class="floating-aboba star-14"></div>
+    <div class="floating-aboba star-15"></div>
+
     ${headerHtml}
     <hr />
     ${getSelfServiceLinks()}

@@ -15,7 +15,11 @@ export type LLMService =
   | "aws"
   | "gcp"
   | "azure"
-  | "deepseek";
+  | "deepseek"
+  | "grok";
+
+
+export type GrokXAIModelFamily = "grok";
 
 export type OpenAIModelFamily =
   | "turbo"
@@ -26,6 +30,7 @@ export type OpenAIModelFamily =
   | "o1"
   | "o1-mini"
   | "o3-mini"
+  | "gpt45"
   | "dall-e";
 export type AnthropicModelFamily = "claude" | "claude-opus";
 export type GoogleAIModelFamily =
@@ -51,13 +56,16 @@ export type ModelFamily =
   | AwsBedrockModelFamily
   | GcpModelFamily
   | AzureOpenAIModelFamily
-  | DeepseekModelFamily;
+  | DeepseekModelFamily
+  | GrokXAIModelFamily;
 
 export const MODEL_FAMILIES = (<A extends readonly ModelFamily[]>(
   arr: A & ([ModelFamily] extends [A[number]] ? unknown : never)
 ) => arr)([
+  "grok",
   "deepseek",
   "turbo",
+  "gpt45",
   "gpt4",
   "gpt4-32k",
   "gpt4-turbo",
@@ -92,6 +100,7 @@ export const MODEL_FAMILIES = (<A extends readonly ModelFamily[]>(
   "azure-o1",
   "azure-o1-mini",
   "azure-o3-mini",
+  "azure-gpt45",
 ] as const);
 
 export const LLM_SERVICES = (<A extends readonly LLMService[]>(
@@ -105,21 +114,25 @@ export const LLM_SERVICES = (<A extends readonly LLMService[]>(
   "gcp",
   "azure",
   "deepseek",
+  "grok",
 ] as const);
 
 export const MODEL_FAMILY_SERVICE: {
   [f in ModelFamily]: LLMService;
 } = {
+  grok: "grok",
   deepseek: "deepseek",
   turbo: "openai",
   gpt4: "openai",
   "gpt4-turbo": "openai",
   "gpt4-32k": "openai",
+  gpt45: "openai",
   gpt4o: "openai",
   "o1": "openai",
   "o1-mini": "openai",
   "o3-mini": "openai",
   "dall-e": "openai",
+  
   claude: "anthropic",
   "claude-opus": "anthropic",
   "aws-claude": "aws",
@@ -139,6 +152,7 @@ export const MODEL_FAMILY_SERVICE: {
   "azure-o1": "azure",
   "azure-o1-mini": "azure",
   "azure-o3-mini": "azure",
+  "azure-gpt45": "azure",
   "gemini-flash": "google-ai",
   "gemini-pro": "google-ai",
   "gemini-ultra": "google-ai",
@@ -168,6 +182,7 @@ export const OPENAI_MODEL_FAMILY_MAP: { [regex: string]: OpenAIModelFamily } = {
   "^o1-mini(-\\d{4}-\\d{2}-\\d{2})?$": "o1-mini",
   "^o1(-\\d{4}-\\d{2}-\\d{2})?$": "o1",
   "^o3-mini(-\d{4}-\d{2}-\d{2})?$": "o3-mini",
+  "^gpt-4\\.5-preview(-\\d{4}-\\d{2}-\\d{2})?$": "gpt45",
 };
 
 export function getOpenAIModelFamily(
@@ -285,6 +300,10 @@ export function getModelFamilyForRequest(req: Request): ModelFamily {
       case "openai":
       case "openai-text":
       case "openai-image":
+        if (req.service === "grok") 
+          modelFamily = "grok";
+          
+          modelFamily = getOpenAIModelFamily(model);
         if (req.service === "deepseek") {
           modelFamily = "deepseek";
         } else {
