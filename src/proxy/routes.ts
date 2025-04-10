@@ -52,6 +52,7 @@ proxyRouter.use("/aws", aws);
 proxyRouter.use("/gcp/claude", addV1, gcp);
 proxyRouter.use("/azure/openai", addV1, azure);
 proxyRouter.use("/deepseek", addV1, deepseek);
+proxyRouter.use("/grok", addV1, grok);
 
 // Redirect browser requests to the homepage.
 proxyRouter.get("*", (req, res, next) => {
