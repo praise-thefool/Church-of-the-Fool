@@ -125,7 +125,7 @@ export type ServiceInfo = {
   & { [f in AzureOpenAIModelFamily]?: BaseFamilyInfo; }
   & { [f in GoogleAIModelFamily]?: BaseFamilyInfo }
   & { [f in MistralAIModelFamily]?: BaseFamilyInfo }
-  & { [f in DeepseekModelFamily]?: BaseFamilyInfo };
+  & { [f in DeepseekModelFamily]?: BaseFamilyInfo }
   & { [f in GrokModelFamily]?: BaseFamilyInfo};
 
 // https://stackoverflow.com/a/66661477
