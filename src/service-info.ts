@@ -21,6 +21,7 @@ import {
   ModelFamily,
   OpenAIModelFamily,
   DeepseekModelFamily,
+  GrokModelFamily,
 } from "./shared/models";
 import { getCostSuffix, getTokenCostUsd, prettyTokens } from "./shared/stats";
 import { getUniqueIps } from "./proxy/rate-limit";
@@ -99,6 +100,7 @@ type GcpInfo = BaseFamilyInfo & {
 export type ServiceInfo = {
   uptime: number;
   endpoints: {
+    grok?: string;
     openai?: string;
     deepseek?: string;
     anthropic?: string;
@@ -124,6 +126,7 @@ export type ServiceInfo = {
   & { [f in GoogleAIModelFamily]?: BaseFamilyInfo }
   & { [f in MistralAIModelFamily]?: BaseFamilyInfo }
   & { [f in DeepseekModelFamily]?: BaseFamilyInfo };
+  & { [f in GrokModelFamily]?: BaseFamilyInfo};
 
 // https://stackoverflow.com/a/66661477
 // type DeepKeyOf<T> = (
@@ -167,7 +170,11 @@ const SERVICE_ENDPOINTS: { [s in LLMService]: Record<string, string> } = {
   },
   deepseek: {
     deepseek: `%BASE%/deepseek`,
+  
   },
+  grok: {
+    grok: `%BASE%/grok`,
+  }
 };
 
 const familyStats = new Map<ModelAggregateKey, number>();
@@ -319,6 +326,7 @@ function addKeyToAggregates(k: KeyPoolKey) {
   addToService("gcp__keys", k.service === "gcp" ? 1 : 0);
   addToService("azure__keys", k.service === "azure" ? 1 : 0);
   addToService("deepseek__keys", k.service === "deepseek" ? 1 : 0);
+  addToService("grok__keys", k.service === "grok" ? 1 : 0);
 
   let sumTokens = 0;
   let sumCost = 0;
@@ -398,6 +406,7 @@ function addKeyToAggregates(k: KeyPoolKey) {
       break;
     default:
       assertNever(k.service);
+    case "grok":
   }
 
   addToService("tokens", sumTokens);
