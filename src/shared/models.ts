@@ -15,7 +15,11 @@ export type LLMService =
   | "aws"
   | "gcp"
   | "azure"
-  | "deepseek";
+  | "deepseek"
+  | "grok";
+
+
+export type GrokXAIModelFamily = "grok";
 
 export type OpenAIModelFamily =
   | "turbo"
@@ -52,11 +56,13 @@ export type ModelFamily =
   | AwsBedrockModelFamily
   | GcpModelFamily
   | AzureOpenAIModelFamily
-  | DeepseekModelFamily;
+  | DeepseekModelFamily
+  | GrokXAIModelFamily;
 
 export const MODEL_FAMILIES = (<A extends readonly ModelFamily[]>(
   arr: A & ([ModelFamily] extends [A[number]] ? unknown : never)
 ) => arr)([
+  "grok",
   "deepseek",
   "turbo",
   "gpt45",
@@ -108,11 +114,13 @@ export const LLM_SERVICES = (<A extends readonly LLMService[]>(
   "gcp",
   "azure",
   "deepseek",
+  "grok",
 ] as const);
 
 export const MODEL_FAMILY_SERVICE: {
   [f in ModelFamily]: LLMService;
 } = {
+  grok: "grok",
   deepseek: "deepseek",
   turbo: "openai",
   gpt4: "openai",
@@ -292,6 +300,10 @@ export function getModelFamilyForRequest(req: Request): ModelFamily {
       case "openai":
       case "openai-text":
       case "openai-image":
+        if (req.service === "grok") 
+          modelFamily = "grok";
+          
+          modelFamily = getOpenAIModelFamily(model);
         if (req.service === "deepseek") {
           modelFamily = "deepseek";
         } else {
