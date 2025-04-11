@@ -30,7 +30,7 @@ const grokRouter = Router();
 
 
 function removeReasonerStuff(req: Request) {
-  if (req.body.model === "grok-3-beta") {
+  if (req.body.model === "grok-3-mini") {
     delete req.body.presence_penalty;
     delete req.body.frequency_penalty;
     delete req.body.temperature;
