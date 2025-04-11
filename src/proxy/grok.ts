@@ -44,11 +44,10 @@ function removeReasonerStuff(req: Request) {
 grokRouter.post(
   "/v1/chat/completions",
   ipLimiter,
-  createPreprocessorMiddleware({ 
-    inApi: "openai",
-    outApi: "openai",
-    service: "grok"
-  }),
+  createPreprocessorMiddleware(
+    { inApi: "openai", outApi: "openai", service: "grok" },
+    { afterTransform: [ removeReasonerStuff ] }
+  ),
   grokProxy
 );
 
