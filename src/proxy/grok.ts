@@ -1,3 +1,4 @@
+import { Request, RequestHandler, Router } from "express";
 import { Router } from "express";
 import { createPreprocessorMiddleware } from "./middleware/request";
 import { ipLimiter } from "./rate-limit";
@@ -27,6 +28,19 @@ const grokProxy = createQueuedProxyMiddleware({
 });
 
 const grokRouter = Router();
+
+
+function removeReasonerStuff(req: Request) {
+  if (req.body.model === "grok-3-beta") {
+    delete req.body.presence_penalty;
+    delete req.body.frequency_penalty;
+    delete req.body.temperature;
+    delete req.body.top_p;
+    delete req.body.logprobs;
+    delete req.body.top_logprobs;
+  }
+}
+
 
 grokRouter.post(
   "/v1/chat/completions",
