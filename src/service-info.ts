@@ -6,6 +6,7 @@ import {
   GcpKey,
   keyPool,
   OpenAIKey,
+  GrokXAIKey,
 } from "./shared/key-management";
 import {
   AnthropicModelFamily,
@@ -39,6 +40,9 @@ const keyIsAwsKey = (k: KeyPoolKey): k is AwsBedrockKey => k.service === "aws";
 const keyIsGcpKey = (k: KeyPoolKey): k is GcpKey => k.service === "gcp";
 const keyIsDeepseekKey = (k: KeyPoolKey): k is DeepseekKey =>
   k.service === "deepseek";
+const keyIsXaiKey = (k: KeyPoolKey): k is GrokXAIKey =>
+  k.service === "grok";
+
 
 /** Stats aggregated across all keys for a given service. */
 type ServiceAggregate = "keys" | "uncheckedKeys" | "orgs";
