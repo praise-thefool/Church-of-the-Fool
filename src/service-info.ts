@@ -414,7 +414,6 @@ function addKeyToAggregates(k: KeyPoolKey) {
         if (!keyIsXaiKey(k)) throw new Error("Invalid key type");
         k.modelFamilies.forEach((f) => {
           incrementGenericFamilyStats(f);
-          addToFamily(`${f}__overQuota`, k.isOverQuota ? 1 : 0);
         });
         break;
   }
