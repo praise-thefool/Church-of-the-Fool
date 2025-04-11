@@ -1,5 +1,4 @@
 import { Request, RequestHandler, Router } from "express";
-import { Router } from "express";
 import { createPreprocessorMiddleware } from "./middleware/request";
 import { ipLimiter } from "./rate-limit";
 import { createQueuedProxyMiddleware } from "./middleware/request/proxy-middleware-factory";
