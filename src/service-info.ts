@@ -410,7 +410,7 @@ function addKeyToAggregates(k: KeyPoolKey) {
       break;
     default:
       assertNever(k.service);
-    case "xai":
+    case "grok":
         if (!keyIsXaiKey(k)) throw new Error("Invalid key type");
         k.modelFamilies.forEach((f) => {
           incrementGenericFamilyStats(f);
